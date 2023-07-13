@@ -10,17 +10,22 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { SigninDto } from './dto/signin-user.dto';
 // import { UpdateUserDto } from './dto/update-user.dto';
 
-@Controller('user')
+@Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('user')
   create(@Body() body: CreateUserDto) {
     return this.userService.create(body);
   }
 
+  @Post('signin')
+  signinUser(@Body() body: SigninDto) {
+    return this.userService.signin(body);
+  }
   // @Get()
   // findAll() {
   //   return this.userService.findAll();

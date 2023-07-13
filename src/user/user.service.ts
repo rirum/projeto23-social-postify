@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { UsersRepository } from './repository/user.repository';
+import { SigninDto } from './dto/signin-user.dto';
 
 @Injectable()
 export class UserService {
@@ -28,4 +29,19 @@ export class UserService {
   //   if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
   //   return user;
   // }
+
+  async signin(body: SigninDto) {
+    const user = await this.userRepository.findUserByEmail(body.email);
+    if (!user)
+      throw new HttpException(
+        'Email or password is incorrect',
+        HttpStatus.UNAUTHORIZED,
+      );
+    const validPassword = bcrypt.compareSync(body.password, user.password);
+    if (!validPassword)
+      throw new HttpException(
+        'Email or password is incorrect',
+        HttpStatus.UNAUTHORIZED,
+      );
+  }
 }
