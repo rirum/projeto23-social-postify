@@ -24,24 +24,24 @@ export class UserService {
     return await this.userRepository.findUserByEmail(email);
   }
 
-  // async findUserById(id: number) {
-  //   const user = await this.userRepository.findUserById(id);
-  //   if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-  //   return user;
-  // }
-
-  async signin(body: SigninDto) {
-    const user = await this.userRepository.findUserByEmail(body.email);
-    if (!user)
-      throw new HttpException(
-        'Email or password is incorrect',
-        HttpStatus.UNAUTHORIZED,
-      );
-    const validPassword = bcrypt.compareSync(body.password, user.password);
-    if (!validPassword)
-      throw new HttpException(
-        'Email or password is incorrect',
-        HttpStatus.UNAUTHORIZED,
-      );
+  async findUserById(id: number) {
+    const user = await this.userRepository.findUserById(id);
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    return user;
   }
+
+  // async signin(body: SigninDto) {
+  //   const user = await this.userRepository.findUserByEmail(body.email);
+  //   if (!user)
+  //     throw new HttpException(
+  //       'Email or password is incorrect',
+  //       HttpStatus.UNAUTHORIZED,
+  //     );
+  //   const validPassword = bcrypt.compareSync(body.password, user.password);
+  //   if (!validPassword)
+  //     throw new HttpException(
+  //       'Email or password is incorrect',
+  //       HttpStatus.UNAUTHORIZED,
+  //     );
+  // }
 }
