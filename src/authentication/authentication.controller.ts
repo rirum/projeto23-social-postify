@@ -20,6 +20,7 @@ export class AuthenticationController {
   @HttpCode(200)
   @Post('signin')
   async signin(@Body() body: AuthSigninDto) {
+    console.log("dentro do signin")
     return this.authenticationService.signin(body);
   }
 
@@ -31,6 +32,7 @@ export class AuthenticationController {
   @UseGuards(AuthGuard)
   @Get('me')
   async userLogged(@userRequest() user: User) {
+    console.log("dentro do me")
     return user;
   }
 }
