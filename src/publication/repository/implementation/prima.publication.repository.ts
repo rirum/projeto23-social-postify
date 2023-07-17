@@ -10,14 +10,7 @@ export class PrismaPublicationRepository implements PublicationRepository {
 
   async createPublication(data: CreatePublicationDto, userId: number) {
     return await this.prisma.publication.create({
-      data: {
-        userId,
-        image: data.image,
-        title: data.title,
-        dateToPublish: data.dateToPublish,
-        published: data.published,
-        socialMedia: data.socialMedia,
-      },
+      data: data,
     });
   }
 
@@ -30,6 +23,6 @@ export class PrismaPublicationRepository implements PublicationRepository {
   }
 
   async findPublicationById(id: number) {
-    return await this.prisma.publication.findUnique({where: {id}});
-    }
+    return await this.prisma.publication.findUnique({ where: { id } });
+  }
 }

@@ -34,14 +34,13 @@ export class AuthenticationService {
         audience: this.AUDIENCE,
       },
     );
-    
+
     return { token };
   }
 
   checkToken(token: string) {
     try {
-      
-      console.log(token)
+      console.log(token);
       const data = this.jwtService.verify(token, {
         issuer: this.ISSUER,
         audience: this.AUDIENCE,

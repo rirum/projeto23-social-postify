@@ -5,6 +5,9 @@ import { UsersRepository } from 'src/user/repository/user.repository';
 import { PrismaUser } from 'src/user/repository/implementation/prismaUser.repository';
 import { UserService } from 'src/user/user.service';
 import { JwtModule } from '@nestjs/jwt';
+import { PublicationService } from 'src/publication/publication.service';
+import { PrismaPublicationRepository } from 'src/publication/repository/implementation/prima.publication.repository';
+import { PublicationRepository } from 'src/publication/repository/publication.repository';
 
 @Module({
   imports: [
@@ -16,9 +19,14 @@ import { JwtModule } from '@nestjs/jwt';
   providers: [
     AuthenticationService,
     UserService,
+    PublicationService,
     {
       provide: UsersRepository,
       useClass: PrismaUser,
+    },
+    {
+      provide: PublicationRepository,
+      useClass: PrismaPublicationRepository,
     },
   ],
 })

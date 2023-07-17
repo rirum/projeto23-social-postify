@@ -13,14 +13,14 @@ import { AuthSignupDto } from './dto/auth-signup.dto';
 import { userRequest } from './decorators/user-decorators';
 import { User } from '@prisma/client';
 
-@Controller('auth')
+@Controller('')
 export class AuthenticationController {
   constructor(private readonly authenticationService: AuthenticationService) {}
 
   @HttpCode(200)
   @Post('signin')
   async signin(@Body() body: AuthSigninDto) {
-    console.log("dentro do signin")
+    console.log('dentro do signin');
     return this.authenticationService.signin(body);
   }
 
@@ -32,7 +32,7 @@ export class AuthenticationController {
   @UseGuards(AuthGuard)
   @Get('me')
   async userLogged(@userRequest() user: User) {
-    console.log("dentro do me")
+    console.log('dentro do me');
     return user;
   }
 }

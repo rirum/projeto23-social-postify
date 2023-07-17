@@ -1,8 +1,10 @@
 import {
+  Equals,
   IsDateString,
   IsNotEmpty,
   IsString,
   Matches,
+  IsBoolean,
 } from 'class-validator';
 
 export class CreatePublicationDto {
@@ -20,12 +22,16 @@ export class CreatePublicationDto {
 
   @IsNotEmpty()
   @IsDateString()
-  @Matches(/^\d{4}-\d{2}-\d{2}$/)
+  // @Matches(/^\d{4}-\d{2}-\d{2}$/)
   dateToPublish: string;
 
-  published = false;
+  @IsBoolean()
+  @Equals(false)
+  published: boolean;
 
   @IsString()
   @IsNotEmpty()
   socialMedia: string;
+
+  userId: number;
 }

@@ -17,26 +17,25 @@ import { PrismaUser } from 'src/user/repository/implementation/prismaUser.reposi
   ],
   controllers: [PublicationController],
   providers: [
-    PublicationService,
-    AuthenticationService,
     UserService,
+    {
+      provide: UsersRepository,
+      useClass: PrismaUser,
+    },
+    AuthenticationService,
+    PublicationService,
+
     {
       provide: PublicationRepository,
       useClass: PrismaPublicationRepository,
     },
-    {
-      provide: UsersRepository,
-      useClass: PrismaUser,
-      
-    }
   ],
   exports: [
     PublicationService,
     {
       provide: PublicationRepository,
       useClass: PrismaPublicationRepository,
-    }
-  ]
- 
+    },
+  ],
 })
 export class PublicationModule {}
